@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BLog | login</title>
+</head>
+<body>
+
+    <h3>Log in:</h3>
+
+    <form th:action="@{/login}" th:method="post" th:object="${loginForm}">
+
+        <input th:type="text" th:field="*{username}" placeholder="username" th:errorClass="error">
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{userName}">Username does not exist</span>
+        <br>
+        <input th:type="password" th:field="*{password}" placeholder="password" th:errorClass="error">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
+        <br>
+        <input type="submit" value="Log in">
+    </form>
+
+</body>
+</html>
