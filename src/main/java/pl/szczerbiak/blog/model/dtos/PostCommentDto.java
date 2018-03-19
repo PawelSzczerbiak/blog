@@ -7,14 +7,18 @@ public class PostCommentDto {
     private Long id;
     private String comment;
     private Date created;
+    private Long idOfPost;
+    private Long idOfUser;
 
     public PostCommentDto(){
     }
 
-    public PostCommentDto(Long id, String comment, Date created) {
+    public PostCommentDto(Long id, String comment, Date created, Long idOfPost, Long idOfUser) {
         this.id = id;
         this.comment = comment;
         this.created = created;
+        this.idOfPost = idOfPost;
+        this.idOfUser = idOfUser;
     }
 
     public Long getId() {
@@ -39,5 +43,21 @@ public class PostCommentDto {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public Long getIdOfPost() {
+        return idOfPost;
+    }
+
+    public void setIdOfPost(Long idOfPost) {
+        this.idOfPost = idOfPost;
+    }
+
+    public Long getIdOfUser() {
+        return idOfUser;
+    }
+
+    public void setIdOfUser(Long idOfUser) {
+        this.idOfUser = idOfUser;
     }
 }

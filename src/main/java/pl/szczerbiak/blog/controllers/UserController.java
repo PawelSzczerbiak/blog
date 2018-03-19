@@ -58,7 +58,7 @@ public class UserController {
     // login
 
     @GetMapping("/login")
-    public String loginPage(Model model){
+    public String loginPage(Model model) {
         model.addAttribute("loginForm", new LoginForm());
         return "login";
     }
@@ -70,15 +70,15 @@ public class UserController {
         boolean logged = userSessionService.loginUser(
                 loginForm.getUsername(), loginForm.getPassword());
 
-        if(!logged){ // TODO: distinguish case when password is incorrect
-            bindingResult.reject("username", null,"Username does not exist");
+        if (!logged) { // TODO: distinguish case when password is incorrect
+            bindingResult.reject("username", null, "Username does not exist");
         }
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "login";
         }
 
-        model.addAttribute("loggedUser",logged);
+        model.addAttribute("loggedUser", logged);
 
         return "redirect:/";
     }

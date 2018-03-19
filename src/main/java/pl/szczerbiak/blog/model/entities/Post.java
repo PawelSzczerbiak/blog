@@ -23,7 +23,7 @@ public class Post {
     private List<PostComment> comments = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "userId") // DTO convension
+    @JoinColumn(name = "userId") // DTO convention
     private User user;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -32,6 +32,8 @@ public class Post {
             inverseJoinColumns = {@JoinColumn(name = "tagId")})
     private Set<Tag> tags = new HashSet<>();
 
+    public Post() {
+    }
 
     public Post(String title, String content) {
         this.title = title;

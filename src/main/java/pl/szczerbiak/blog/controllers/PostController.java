@@ -10,4 +10,5 @@ public class PostController {
     @Autowired
     PostRepository postRepository;
 
+
 }

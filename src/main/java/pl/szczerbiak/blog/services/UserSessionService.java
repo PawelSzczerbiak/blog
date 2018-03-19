@@ -30,9 +30,8 @@ public class UserSessionService {
     // Frontend data
     public boolean loginUser(String username, String password) {
 
-        Optional<User> userOptional = userRepository.findByUsername(username);
+        Optional<User> userOptional = userRepository.findUserByUsername(username);
 
-        System.out.println("AA: " + userOptional.get());
         // User does not exist
         if (!userOptional.isPresent()) {
             return false;

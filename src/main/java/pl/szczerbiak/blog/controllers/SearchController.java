@@ -14,17 +14,17 @@ public class SearchController {
     @Autowired
     PostRepository postRepository;
 
-/*    @GetMapping("/search/posts")
+    @GetMapping("/search/posts")
     public String searchPosts(@RequestParam String searchPhrase,
                          Model model) {
 
-        List<Post> postList = postRepository.findAllByTitleContainsOrContentContains(
+        List<Post> postList = postRepository.findPostsByTitleContainsOrContentContains(
                 searchPhrase, searchPhrase);
 
         model.addAttribute("posts",postList);
         model.addAttribute("searchPhrase",searchPhrase);
 
         return "posts";
-    }*/
+    }
 
 }

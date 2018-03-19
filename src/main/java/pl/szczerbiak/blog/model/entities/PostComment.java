@@ -17,6 +17,24 @@ public class PostComment {
     @JoinColumn(name = "postId")
     private Post post;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    public PostComment(){
+    }
+
+    public PostComment(String comment) {
+        this.comment = comment;
+    }
+
+    public PostComment(String comment, AuditEntity audit, Post post, User user) {
+        this.comment = comment;
+        this.audit = audit;
+        this.post = post;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,5 +65,13 @@ public class PostComment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

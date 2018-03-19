@@ -16,6 +16,7 @@ import java.util.List;
 // Tags to posts are added from API
 // Just for practise...
 @RestController
+@RequestMapping("/api/tag")
 public class TagRestController {
 
     private TagRepository tagRepository;
@@ -30,7 +31,7 @@ public class TagRestController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/api/tag/add") // equivalent to:
+    @PostMapping("/add") // equivalent to:
     // @RequestMapping(value = "/tag", method = RequestMethod.POST)
     public ResponseEntity<TagDto> createTag(@RequestParam String tagName){
 
@@ -43,7 +44,7 @@ public class TagRestController {
         return ResponseEntity.ok().body(tagDto);
     }
 
-    @PutMapping("/api/tag/addToPpost")
+    @PutMapping("/addpost")
     public ResponseEntity<PostDto> addTagToPost(@RequestParam Long tagId,
                                                 @RequestParam Long postId){
 
@@ -56,7 +57,7 @@ public class TagRestController {
         return ResponseEntity.ok().body(modelMapper.map(post, PostDto.class));
     }
 
-    @GetMapping("/api/tags")
+    @GetMapping("/all")
     public List<Tag> getAllTags(){
         return tagRepository.findAll();
     }
