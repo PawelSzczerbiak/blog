@@ -49,6 +49,14 @@ public class UserSessionService {
         return logged;
     }
 
+    public boolean logoutUser() {
+
+        setUserDto(null);
+        logged = false;
+
+        return logged;
+    }
+
     public boolean getLogged() {
         return logged;
     }

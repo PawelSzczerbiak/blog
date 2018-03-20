@@ -13,14 +13,14 @@ import lombok.ToString;
 @ToString(exclude = {"password"})
 public class RegisterForm { // validation by @Valid
 
-    @Size(min = 5, message = "Username must be longer than {min} characters." +
-            "Given phrase ${validatedValue} does not match")
+    @Size(min = 5, message = "Field must be longer than {min} signs") //+
+//            "Given phrase '${validatedValue}' does not match")
     private String username;
 
-    @Size(min = 6, max = 10, message = "Password must be between 6 and 10 characters")
+    @Size(min = 6, max = 10, message = "Field must be between 6 and 10 signs")
     private String password;
 
-    @Pattern(regexp = "[A-z0-9.]+@[a-z0-9\\-]+\\.[a-z]{2,5}", message = "E-mail not correct")
+    @Pattern(regexp = "[A-z0-9.]+@[a-z0-9\\-]+\\.[a-z]{2,5}", message = "Incorrect email format")
     private String email;
 
     public String getUsername() {

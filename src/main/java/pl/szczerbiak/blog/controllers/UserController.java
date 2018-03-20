@@ -32,7 +32,7 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    // registration
+    // Registration
 
     @GetMapping("/register")
     public String registerPage(Model model) {
@@ -55,7 +55,7 @@ public class UserController {
         return "index";
     }
 
-    // login
+    // Login
 
     @GetMapping("/login")
     public String loginPage(Model model) {
@@ -78,6 +78,17 @@ public class UserController {
             return "login";
         }
 
+        model.addAttribute("loggedUser", logged);
+
+        return "redirect:/";
+    }
+
+    // Logout
+
+    @GetMapping("/logout")
+    public String logoutUser(Model model) {
+
+        boolean logged =  userSessionService.logoutUser();
         model.addAttribute("loggedUser", logged);
 
         return "redirect:/";

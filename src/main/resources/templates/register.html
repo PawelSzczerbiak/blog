@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Blog | sign in</title>
+    <title>Blog | sign up</title>
 
     <!-- Custom styles for this template -->
     <link href="bootstrap.min.css" rel="stylesheet">
@@ -10,21 +10,24 @@
 </head>
 <body class="text-center">
 
-    <form class="form-signin" th:action="@{/login}" th:method="post" th:object="${loginForm}">
-        <img class="mb-4" th:src="@{'/icons/freeiconspng_signin.png'}" alt="signin" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <form class="form-signin" th:action="@{/register}" th:method="post" th:object="${registerForm}">
+        <img class="mb-4" th:src="@{'/icons/iconsplace_signup.png'}" alt="signup" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
         <label for="inputUsername" class="sr-only">Username</label>
         <input th:type="text" class="form-control" id="inputUsername" th:field="*{username}" placeholder="Username" th:errorClass="error" required autofocus>
-        <span class="warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username does not exist</span>
+        <span class="warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username already exists</span>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input th:type="email" class="form-control" id="inputEmail" th:field="*{email}" placeholder="Email" th:errorClass="error" required>
+        <span class="warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Username already exists</span>
         <label for="inputPassword" class="sr-only">Password</label>
         <input th:type="password" class="form-control" id="inputPassword" th:field="*{password}" placeholder="Password" th:errorClass="error" required>
-        <span class="warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
+        <span class="warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">>Password too weak</span>
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
     </form>
 

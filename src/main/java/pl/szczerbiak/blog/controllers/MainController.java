@@ -34,12 +34,11 @@ public class MainController {
         model.addAttribute("loggedUser", userSessionService.getUserDto());
 
         if (userSessionService.getUserDto() == null) {
-            model.addAttribute("name", "You are not logged in");
-            return "logout";
+            model.addAttribute("name", "logout");
         } else {
             model.addAttribute("name", userSessionService.getUserDto().getUsername());
-            return "index";
         }
+        return "index";
     }
 
     @GetMapping("/post/add")
