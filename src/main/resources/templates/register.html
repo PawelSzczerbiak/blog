@@ -12,7 +12,7 @@
 
     <form class="form-signin" th:action="@{/register}" th:method="post" th:object="${registerForm}">
         <img class="mb-4" th:src="@{'/icons/iconsplace_signup.png'}" alt="signup" height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Registration form</h1>
         <label for="inputUsername" class="sr-only">Username</label>
         <input th:type="text" class="form-control" id="inputUsername" th:field="*{username}" placeholder="Username" th:errorClass="error" required autofocus>
         <span class="warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username already exists</span>
@@ -27,7 +27,7 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
     </form>
 

@@ -16,10 +16,6 @@
 </head>
 <body>
 
-<!-- https://getbootstrap.com/docs/4.0/examples/ -->
-
-    <!-- Navbar fixed -->
-
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,17 +26,20 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" th:href="@{/posts}">Posts</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">Java</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Python</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
+                    <a class="nav-link dropdown-toggle" href="https://github.com/PawelSzczerbiak" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="https://github.com/PawelSzczerbiak/SmoG">SmoG</a>
+                        <a class="dropdown-item" href="http://pszczerbiak.pythonanywhere.com/">Carclassifier</a>
+                        <a class="dropdown-item" href="http://pskwejk.herokuapp.com/">Kwejk</a>
                     </div>
                 </li>
             </ul>
@@ -51,7 +50,7 @@
                 <button class="btn btn-outline-info my-2 my-sm-0 mr-sm-1" type="submit">Sign up</button>
             </form>
             <form  th:if="${name}=='logout'" th:action="@{/login}">
-                <button class="btn btn-outline-warning my-2 my-sm-0">Sign in</a></button>
+                <button class="btn btn-outline-warning my-2 my-sm-0">Log in</a></button>
             </form>
             <form  th:if="${name}!='logout'" th:action="@{/logout}">
                 <button class="btn btn-outline-success my-2 my-sm-0">Logout</a></button>
@@ -69,29 +68,6 @@
                 <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
             </div>
         </div>
-
-        <div class="container">
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="col-md-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                </div>
-                <div class="col-md-4">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                </div>
-            </div>
-            <hr>
-
-        </div> <!-- /container -->
 
     </main>
 
@@ -242,12 +218,8 @@
         </p>
     </footer>
 
-    <!-- Optional JavaScript -->
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </body>
 </html>

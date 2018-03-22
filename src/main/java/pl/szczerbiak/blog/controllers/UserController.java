@@ -15,6 +15,7 @@ import pl.szczerbiak.blog.repositories.UserRepository;
 import pl.szczerbiak.blog.services.UserSessionService;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -43,7 +44,13 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute @Valid RegisterForm registerForm,
-                               BindingResult bindingResult, Model model) {
+                               BindingResult bindingResult) {
+
+        Optional<User> userOptional = userRepository.findUserByUsername(registerForm.getUsername());
+
+        if (userOptional.isPresent()) {
+            bindingResult.rejectValue("username", "error.username", "An account already exists for this username");
+        }
 
         if (bindingResult.hasErrors()) {
             return "register";
@@ -52,7 +59,7 @@ public class UserController {
         User user = modelMapper.map(registerForm, User.class);
         userRepository.save(user);
 
-        return "index";
+        return "redirect:/";
     }
 
     // Login
@@ -71,7 +78,7 @@ public class UserController {
                 loginForm.getUsername(), loginForm.getPassword());
 
         if (!logged) { // TODO: distinguish case when password is incorrect
-            bindingResult.reject("username", null, "Username does not exist");
+            bindingResult.rejectValue("username", "error.username", "Username or password incorrect");
         }
 
         if (bindingResult.hasErrors()) {
@@ -88,7 +95,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logoutUser(Model model) {
 
-        boolean logged =  userSessionService.logoutUser();
+        boolean logged = userSessionService.logoutUser();
         model.addAttribute("loggedUser", logged);
 
         return "redirect:/";

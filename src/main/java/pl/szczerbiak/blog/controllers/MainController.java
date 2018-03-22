@@ -69,6 +69,15 @@ public class MainController {
 
     @GetMapping("/posts")
     public String postsPage(Model model) {
+
+        model.addAttribute("loggedUser", userSessionService.getUserDto());
+
+        if (userSessionService.getUserDto() == null) {
+            model.addAttribute("name", "logout");
+        } else {
+            model.addAttribute("name", userSessionService.getUserDto().getUsername());
+        }
+
         List<Post> postList = new ArrayList<>();
         // Very useful !!!!!!!
         Iterable<Post> postIterable = postRepository.findAll();
