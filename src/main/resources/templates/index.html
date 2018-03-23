@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/posts}">Posts</a>
@@ -50,28 +50,15 @@
                 <button class="btn btn-outline-info my-2 my-sm-0 mr-sm-1" type="submit">Sign up</button>
             </form>
             <form  th:if="${name}=='logout'" th:action="@{/login}">
-                <button class="btn btn-outline-warning my-2 my-sm-0">Log in</a></button>
+                <button class="btn btn-outline-warning my-2 my-sm-0">Log in</button>
             </form>
             <form  th:if="${name}!='logout'" th:action="@{/logout}">
-                <button class="btn btn-outline-success my-2 my-sm-0">Logout</a></button>
+                <button class="btn btn-outline-success my-2 my-sm-0">Logout</button>
             </form>
         </div>
     </nav>
 
-    <main role="main">
-
-        <!-- Main jumbotron  -->
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-3">Java/Python blog</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-            </div>
-        </div>
-
-    </main>
-
-    <main role="main" class="container">
+    <main role="main" class="container mt-4">
 
         <div class="row mb-2">
             <div class="col-md-6">

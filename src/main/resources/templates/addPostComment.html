@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Blog | posts</title>
+    <title>Blog | add comment</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" th:fragment="" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/posts}">Posts</a>
@@ -58,48 +58,25 @@
         </div>
     </nav>
 
-    <main role="main" class="container mt-4">
+    <main role="main" class="container mt-4 text-center">
 
-        <div class="row">
-
-
-            <div class="col-md-8 blog-main">
-
-                <form th:if="${name}!='logout'" th:href="@{/postAdd}" th:action="@{/postAdd}">
-                    <button class="btn btn-outline-info float-right">Add post</a></button>
-                </form>
-
-                <div th:each="post : ${posts}" class="blog-post">
-                    <h2 th:text="${post.title}" class="blog-post-title"></h2>
-                    <p class="blog-post-meta">
-                        <span th:text="${#dates.format(post.audit.created, 'yyyy-MM-dd')} + ' by '"/>
-                        <a href="#"><span th:text="${post.user.username}"></span></a>
-                    </p>
-                    <div th:text="${post.content}"></div>
-
-                    <div class="m-4 border-top">
-                        <a th:if="${name}!='logout'" class="mt-2 mb-2 float-right" th:href="@{'/postCommentAdd' + ${post.id}}">Add comment</a>
-                        <p class="mt-2 mb-2 font-italic">Comments:</p>
-                        <div th:each="comment : ${post.comments}">
-                            <p class="blog-post-meta mb-1">
-                                <span th:text="${#dates.format(comment.audit.created, 'yyyy-MM-dd')} + ' by '"/>
-                                <a href="#"><span th:text="${comment.user.username}"></span></a>
-                            </p>
-                            <p th:text="${comment.comment}"></p>
-                        </div>
-                    </div>
-                </div>
-
+            <div  th:if="${name}=='logout'" class="my-5">
+                <a th:href="@{/login}">Log in</a>
+                <span> to add a comment</span>
             </div>
-        </div>
-    </main>
 
-    <footer class="blog-footer">
-        <p>&copy; AK & PS 2018</p>
-        <p>
-            <a href="#">Back to top</a>
-        </p>
-    </footer>
+        <div class="col-md-8 blog-main">
+
+        <form th:if="${name}!='logout'" th:action="@{/postCommentAdd}" th:method="post" th:object="${postCommentForm}">
+            <h1 class="h3 mb-3 font-weight-normal">Comment form</h1>
+            <input class="form-control" th:field="*{userId}" hidden>
+            <input class="form-control" th:field="*{postId}" hidden>
+            <textarea class="form-control" th:field="*{comment}" placeholder="Content" required></textarea>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        </form>
+        </div>
+
+    </main>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

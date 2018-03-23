@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.szczerbiak.blog.model.entities.Post;
-import pl.szczerbiak.blog.model.entities.PostComment;
 import pl.szczerbiak.blog.repositories.PostRepository;
 import pl.szczerbiak.blog.services.UserSessionService;
 
@@ -38,28 +35,6 @@ public class MainController {
         } else {
             model.addAttribute("name", userSessionService.getUserDto().getUsername());
         }
-        return "index";
-    }
-
-    @GetMapping("/post/add")
-    public String addPostPage() {
-        return "addPost";
-    }
-
-    @PostMapping("/post/add")
-    public String addPost(@RequestParam(value = "title") String title,
-                          @RequestParam String content, Model model) {
-
-        Post post = new Post(title, content);
-
-        // List initialization
-        // TODO: improve it
-        PostComment postComment = new PostComment();
-        postComment.setComment(title);
-        post.addComment(postComment);
-
-        postRepository.save(post);
-
         return "index";
     }
 

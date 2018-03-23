@@ -44,7 +44,7 @@ public class PostRestController {
         return ResponseEntity.ok().body(postDto);
     }
 
-    @PostMapping("/addcomment/{userId}/{postId}/")
+    @PostMapping("/addcomment/{postId}/{userId}")
     public ResponseEntity<PostCommentDto> createPostComment(@PathVariable Long userId,
                                                          @PathVariable Long postId,
                                                          @RequestParam String comment) {
