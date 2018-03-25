@@ -40,19 +40,20 @@
                         <a class="dropdown-item" href="https://github.com/PawelSzczerbiak/SmoG">SmoG</a>
                         <a class="dropdown-item" href="http://pszczerbiak.pythonanywhere.com/">Carclassifier</a>
                         <a class="dropdown-item" href="http://pskwejk.herokuapp.com/">Kwejk</a>
+                        <a class="dropdown-item" href="http://pslorem.herokuapp.com/">Lorem generator</a>
                     </div>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <form class="form-inline mt-2 mt-md-0" th:action="@{/postsContentSearch}" th:method="get">
+                <input class="form-control mr-sm-2" th:type="text" name="phrase" placeholder="Search" aria-label="Search">
             </form>
-            <form th:if="${name}=='logout'" th:action="@{/register}">
+            <form th:if="${loggedUser} == null" th:action="@{/register}">
                 <button class="btn btn-outline-info my-2 my-sm-0 mr-sm-1" type="submit">Sign up</button>
             </form>
-            <form  th:if="${name}=='logout'" th:action="@{/login}">
+            <form  th:if="${loggedUser} == null" th:action="@{/login}">
                 <button class="btn btn-outline-warning my-2 my-sm-0">Log in</button>
             </form>
-            <form  th:if="${name}!='logout'" th:action="@{/logout}">
+            <form  th:if="${loggedUser} != null" th:action="@{/logout}">
                 <button class="btn btn-outline-success my-2 my-sm-0">Logout</button>
             </form>
         </div>
@@ -65,9 +66,13 @@
 
             <div class="col-md-8 blog-main">
 
-                <form th:if="${name}!='logout'" th:href="@{/postAdd}" th:action="@{/postAdd}">
+                <form th:if="${loggedUser} != null" th:href="@{/postAdd}" th:action="@{/postAdd}">
                     <button class="btn btn-outline-info float-right">Add post</a></button>
                 </form>
+
+                <h3 th:if="${#lists.isEmpty(posts)}" class="pb-3 mb-4">
+                    Nothing found
+                </h3>
 
                 <div th:each="post : ${posts}" class="blog-post">
                     <h2 th:text="${post.title}" class="blog-post-title"></h2>
@@ -77,8 +82,8 @@
                     </p>
                     <div th:text="${post.content}"></div>
 
-                    <div class="m-4 border-top">
-                        <a th:if="${name}!='logout'" class="mt-2 mb-2 float-right" th:href="@{'/postCommentAdd' + ${post.id}}">Add comment</a>
+                    <div class="my-4 ml-4 border-top">
+                        <a th:if="${loggedUser} != null" class="mt-2 mb-2 float-right" th:href="@{'/postCommentAdd' + ${post.id}}">Add comment</a>
                         <p class="mt-2 mb-2 font-italic">Comments:</p>
                         <div th:each="comment : ${post.comments}">
                             <p class="blog-post-meta mb-1">

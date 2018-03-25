@@ -8,23 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import pl.szczerbiak.blog.model.dtos.PostCommentDto;
 import pl.szczerbiak.blog.model.dtos.PostDto;
 import pl.szczerbiak.blog.model.forms.PostCommentForm;
-import pl.szczerbiak.blog.repositories.PostCommentRepository;
-import pl.szczerbiak.blog.repositories.PostRepository;
 import pl.szczerbiak.blog.services.PostService;
 import pl.szczerbiak.blog.services.UserSessionService;
 
 @Controller
 public class PostController {
 
-    private PostRepository postRepository;
-    private PostCommentRepository postCommentRepository;
     private PostService postService;
     private UserSessionService userSessionService;
 
     @Autowired
-    public PostController(PostRepository postRepository, PostCommentRepository postCommentRepository, PostService postService, UserSessionService userSessionService) {
-        this.postRepository = postRepository;
-        this.postCommentRepository = postCommentRepository;
+    public PostController(PostService postService, UserSessionService userSessionService) {
         this.postService = postService;
         this.userSessionService = userSessionService;
     }
@@ -32,12 +26,8 @@ public class PostController {
     @GetMapping("/postAdd")
     public String addPostPage(Model model) {
 
-        model.addAttribute("loggedUser", userSessionService.getUserDto());
-
-        if (userSessionService.getUserDto() == null) {
-            model.addAttribute("name", "logout");
-        } else {
-            model.addAttribute("name", userSessionService.getUserDto().getUsername());
+        if (userSessionService.getUserDto() != null) {
+            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
         }
 
         return "addPost";
@@ -58,13 +48,9 @@ public class PostController {
     @GetMapping("/postCommentAdd{postId}")
     public String addPostCommentPage(@PathVariable Long postId, Model model) {
 
-        model.addAttribute("loggedUser", userSessionService.getUserDto());
-
-        if (userSessionService.getUserDto() == null) {
-            model.addAttribute("name", "logout");
-        } else {
+        if (userSessionService.getUserDto() != null) {
             Long userId = userSessionService.getUserDto().getId();
-            model.addAttribute("name", userSessionService.getUserDto().getUsername());
+            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
             model.addAttribute("postCommentForm", new PostCommentForm(userId, postId));
         }
 
