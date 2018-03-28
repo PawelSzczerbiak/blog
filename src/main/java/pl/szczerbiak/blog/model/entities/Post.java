@@ -1,6 +1,7 @@
 package pl.szczerbiak.blog.model.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,8 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    @Size(max = 1000, message = "Field must be shorter than {max} characters")
+    @Column(length = 1000)
     private String content;
 
     @Embedded

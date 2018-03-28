@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.szczerbiak.blog.model.dtos.PostCommentDto;
 import pl.szczerbiak.blog.model.dtos.PostDto;
+import pl.szczerbiak.blog.model.entities.Post;
 import pl.szczerbiak.blog.model.forms.PostCommentForm;
 import pl.szczerbiak.blog.services.PostService;
 import pl.szczerbiak.blog.services.UserSessionService;
+
+import javax.validation.Valid;
 
 @Controller
 public class PostController {
@@ -30,16 +34,21 @@ public class PostController {
             model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
         }
 
+        model.addAttribute("post", new Post());
         return "addPost";
     }
 
     @PostMapping("/postAdd")
-    public String addPost(@RequestParam(value = "title") String title,
-                          @RequestParam(value = "content") String content) {
+    public String addPost(@ModelAttribute @Valid Post post,
+                          BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()){
+            return "addPost";
+        }
 
         Long userId = userSessionService.getUserDto().getId();
 
-        PostDto postDto = postService.createPost(title, content, userId);
+        PostDto postDto = postService.createPost(post.getTitle(), post.getContent(), userId);
         ResponseEntity.ok().body(postDto);
 
         return "redirect:/posts";

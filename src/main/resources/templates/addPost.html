@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="jumbotron.css" rel="stylesheet">
     <link href="blog.css" rel="stylesheet">
+    <link href="forms.css" rel="stylesheet">
 </head>
 <body>
 
@@ -67,10 +68,11 @@
 
         <div class="col-md-8 blog-main">
 
-        <form th:if="${name}!='logout'" th:action="@{/postAdd}" th:method="post">
+        <form th:if="${name}!='logout'" th:action="@{/postAdd}" th:object="${post}" th:method="post">
             <h1 class="h3 mb-3 font-weight-normal">Post form</h1>
-            <input th:type="text" class="form-control"  th:name="title" placeholder="Title" required autofocus>
-            <textarea class="form-control" th:name="content" placeholder="Content" required></textarea>
+            <input th:type="text" class="form-control"  th:field="*{title}" placeholder="Title" required autofocus>
+            <textarea class="form-control" th:field="*{content}" placeholder="Content" rows="10" required maxlength="1000"></textarea>
+            <span class="warning" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
         </form>
         </div>

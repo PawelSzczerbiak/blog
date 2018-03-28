@@ -51,7 +51,9 @@ public class MainController {
 
         List<Post> postList = new ArrayList<>();
         // Very useful construction !!!!!!!
-        Iterable<Post> posts = postRepository.findAll();
+//        Iterable<Post> posts = postRepository.findAll();
+//        Iterable<Post> posts = postRepository.findAllByOrderByIdDesc();
+        Iterable<Post> posts = postRepository.findAllBy(Sort.by(Sort.Direction.DESC, "audit.created"));
         posts.forEach(postList::add);
 
         model.addAttribute("posts", postList);

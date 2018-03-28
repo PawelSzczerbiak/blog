@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="jumbotron.css" rel="stylesheet">
     <link href="blog.css" rel="stylesheet">
+    <link href="forms.css" rel="stylesheet">
 </head>
 <body>
 
@@ -71,7 +72,7 @@
             <h1 class="h3 mb-3 font-weight-normal">Comment form</h1>
             <input class="form-control" th:field="*{userId}" hidden>
             <input class="form-control" th:field="*{postId}" hidden>
-            <textarea class="form-control" th:field="*{comment}" placeholder="Content" required></textarea>
+            <textarea class="form-control" th:field="*{comment}" placeholder="Content" required autofocus></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
         </form>
         </div>

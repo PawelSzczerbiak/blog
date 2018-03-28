@@ -32,7 +32,10 @@
                     <a class="nav-link" href="#">Java</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Python</a>
+                    <a class="nav-link" href="#">Kotlin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Scala</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="https://github.com/PawelSzczerbiak" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Projects</a>
@@ -80,7 +83,7 @@
                         <span th:text="${#dates.format(post.audit.created, 'yyyy-MM-dd')} + ' by '"/>
                         <a href="#"><span th:text="${post.user.username}"></span></a>
                     </p>
-                    <div th:text="${post.content}"></div>
+                    <div th:utext="${post.content}"></div>
 
                     <div class="my-4 ml-4 border-top">
                         <a th:if="${loggedUser} != null" class="mt-2 mb-2 float-right" th:href="@{'/postCommentAdd' + ${post.id}}">Add comment</a>
@@ -90,7 +93,7 @@
                                 <span th:text="${#dates.format(comment.audit.created, 'yyyy-MM-dd')} + ' by '"/>
                                 <a href="#"><span th:text="${comment.user.username}"></span></a>
                             </p>
-                            <p th:text="${comment.comment}"></p>
+                            <p th:utext="${comment.comment}"></p>
                         </div>
                     </div>
                 </div>

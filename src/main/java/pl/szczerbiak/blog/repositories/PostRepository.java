@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+    List<Post> findAllByOrderByIdDesc();
+    List<Post> findAllBy(Sort sort);
     List<Post> findPostsByTitleContains(String titlePhrase);
     List<Post> findPostsByTitleContains(String titlePhrase, Sort sort);
     List<Post> findPostsByTitleContainsOrContentContains(String titlePhrase, String contentPhrase);
