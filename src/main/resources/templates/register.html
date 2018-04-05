@@ -7,6 +7,7 @@
     <!-- Custom styles for this template -->
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="signin.css" rel="stylesheet">
+    <link href="forms.css" rel="stylesheet">
 </head>
 <body class="text-center">
 
@@ -22,12 +23,8 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input th:type="password" class="form-control" id="inputPassword" th:field="*{password}" placeholder="Password" th:errorClass="error" required>
         <span class="warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">>Password too weak</span>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+        <p class="mt-4"><a th:href="@{/}">Main page</a></p>
         <p class="mt-5 mb-3 text-muted">&copy; 2018</p>
     </form>
 

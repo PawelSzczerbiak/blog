@@ -30,10 +30,6 @@ public class PostController {
     @GetMapping("/postAdd")
     public String addPostPage(Model model) {
 
-        if (userSessionService.getUserDto() != null) {
-            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
-        }
-
         model.addAttribute("post", new Post());
         return "addPost";
     }
@@ -59,7 +55,6 @@ public class PostController {
 
         if (userSessionService.getUserDto() != null) {
             Long userId = userSessionService.getUserDto().getId();
-            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
             model.addAttribute("postCommentForm", new PostCommentForm(userId, postId));
         }
 

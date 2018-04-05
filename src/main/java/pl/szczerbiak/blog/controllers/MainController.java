@@ -5,6 +5,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.szczerbiak.blog.model.dtos.UserDto;
@@ -22,6 +23,15 @@ public class MainController {
     private PostRepository postRepository;
     private UserSessionService userSessionService;
 
+    // Logged username
+    @ModelAttribute("loggedUser")
+    public String showLoggedUserName() {
+        if (userSessionService.getUserDto() != null) {
+            return userSessionService.getUserDto().getUsername();
+        }
+        return null;
+    }
+
     @Autowired
     public MainController(PostRepository postRepository, UserSessionService userSessionService) {
         this.postRepository = postRepository;
@@ -30,11 +40,6 @@ public class MainController {
 
     @GetMapping("/")
     public String getIndexPage(Model model) {
-
-        if (userSessionService.getUserDto() != null) {
-            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
-        }
-
         return "index";
     }
 
@@ -44,10 +49,6 @@ public class MainController {
 
     @GetMapping("/posts")
     public String postsPage(Model model) {
-
-        if (userSessionService.getUserDto() != null) {
-            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
-        }
 
         List<Post> postList = new ArrayList<>();
         // Very useful construction !!!!!!!
@@ -66,10 +67,6 @@ public class MainController {
     @GetMapping("/postsTitleSearch")
     public String postsByTitle(@RequestParam String title, Model model) {
 
-        if (userSessionService.getUserDto() != null) {
-            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
-        }
-
         List<Post> postList = new ArrayList<>();
         Iterable<Post> posts = postRepository.findPostsByTitleContains(title);
         posts.forEach(postList::add);
@@ -83,10 +80,6 @@ public class MainController {
 
     @GetMapping("/postsContentSearch")
     public String postsByTitleContent(@RequestParam String phrase, Model model) {
-
-        if (userSessionService.getUserDto() != null) {
-            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
-        }
 
         List<Post> postList = new ArrayList<>();
         Iterable<Post> posts = postRepository
@@ -105,10 +98,6 @@ public class MainController {
                                    @PathVariable String sortField,
                                    @PathVariable String sortDirection,
                                    Model model) {
-
-        if (userSessionService.getUserDto() != null) {
-            model.addAttribute("loggedUser", userSessionService.getUserDto().getUsername());
-        }
 
         Sort.Direction direction = Sort.Direction.ASC;
 
