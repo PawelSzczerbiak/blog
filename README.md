@@ -5,13 +5,14 @@ Template code was delivered by [Akademia Kodu](http://www.akademiakodu.pl/).
 
 My contribution:
 - own frontend (Bootstrap)
-- ability to add comments to a given post
+- adding comments to a given post
 - displaying posts and comments in specific order
-- some little improvements (mainly in controllers, services etc.)
+- searching posts by phrase
+- some little improvements (mainly in controllers and services)
 
 ---
 
-<p align="center"><img src="index.png" width="600"/></p>
+<p align="center"><img src="index_new.png" width="600"/></p>
 <p align="center">
 <img src="register.png" width="300"/>
   <img src="login.png" width="300"/><br>
